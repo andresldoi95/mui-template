@@ -21,7 +21,7 @@ export default function SignupPage() {
     fullname: "",
     username: "",
     email: "",
-    gendre: "M",
+    gender: "M",
     date_birth: "",
     password: "",
     password_confirmation: "",
@@ -75,20 +75,19 @@ export default function SignupPage() {
         </Grid>
         <Grid item md={4} xs={12}>
           <FormControl fullWidth>
-            <InputLabel id="gendre">Gendre</InputLabel>
+            <InputLabel id="gender">Gender</InputLabel>
             <Select
-              labelId="gendre"
+              labelId="gender"
               id="demo-simple-select"
-              label="Gendre"
+              label="Gender"
               required
-              name="gendre"
-              value={form.gendre}
+              name="gender"
+              value={form.gender}
               onChange={handleSelectChange}
             >
               <MenuItem value="M">Male</MenuItem>
               <MenuItem value="F">Female</MenuItem>
               <MenuItem value="O">Other</MenuItem>
-              <MenuItem value="P">Prefer not to say</MenuItem>
             </Select>
           </FormControl>
         </Grid>

@@ -14,6 +14,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import GroupIcon from "@mui/icons-material/Group";
 import { useTheme } from "@mui/material/styles";
 
 export default function AppDrawer({
@@ -67,12 +68,21 @@ export default function AppDrawer({
             <ListItemIcon>
               <PersonAddIcon />
             </ListItemIcon>
-            <ListItemText primary="Register form" />
+            <ListItemText primary="Sign up form" />
           </ListItemButton>
         </ListItem>
       </List>
       <Divider />
-      <List></List>
+      <List>
+      <ListItem disablePadding>
+          <ListItemButton href="/users" LinkComponent={Link}>
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText primary="Users" />
+          </ListItemButton>
+        </ListItem>
+      </List>
     </Drawer>
   );
 }

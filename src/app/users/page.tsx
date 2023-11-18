@@ -1,37 +1,12 @@
-"use client"; 
+"use client";
 import React, { useState } from 'react';
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
+import { Button, IconButton, Container, Box, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const UserForm: React.FC<{ user: User | null, onSave: (user: User) => void, open: boolean, onClose: () => void }> = ({ user, onSave, open, onClose }) => {
-  const [name, setName] = useState(user ? user.name : '');
-  const [email, setEmail] = useState(user ? user.email : '');
-
-  const handleSubmit = () => {
-    onSave({ id: user ? user.id : Date.now(), name, email });
-  };
-
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{user ? 'Editar Usuario' : 'Agregar Usuario'}</DialogTitle>
-      <DialogContent>
-        <TextField value={name} onChange={e => setName(e.target.value)} label="Nombre" fullWidth />
-        <TextField value={email} onChange={e => setEmail(e.target.value)} label="Correo electrónico" fullWidth />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button onClick={handleSubmit}>Guardar</Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
+import AddIcon from '@mui/icons-material/Add';
+import { User } from '@/app/interfaces/users/User';
+import UserForm from '@/app/components/users/UserForm';
+import { AppDataTable } from '@/app/components/controls/AppDataTable';
 
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
@@ -45,34 +20,66 @@ export default function UsersPage() {
   };
 
   const handleEditUser = (user: User) => {
-    setUsers(users.map(u => u.id === user.id ? user : u));
+    setUsers(users.map((u) => (u.fullname === user.fullname ? user : u)));
     setSelectedUser(null);
     setOpen(false);
   };
 
-  const handleDeleteUser = (id: number) => {
-    setUsers(users.filter(u => u.id !== id));
+  const handleDeleteUser = (fullname: string) => {
+    setUsers(users.filter((u) => u.fullname !== fullname));
   };
 
+  const columns = [
+    { id: 'fullname', label: 'Nombre completo' },
+    { id: 'username', label: 'Nombre de usuario' },
+    { id: 'email', label: 'Correo electrónico' },
+    { id: 'gendre', label: 'Género' },
+    { id: 'date_birth', label: 'Fecha de nacimiento' },
+  ];
+
   return (
-    <div>
-      <Button onClick={() => { setSelectedUser(null); setOpen(true); }}>Agregar usuario</Button>
-      <UserForm user={selectedUser} onSave={selectedUser ? handleEditUser : handleAddUser} open={open} onClose={() => setOpen(false)} />
-      <List>
-        {users.map(user => (
-          <ListItem key={user.id}>
-            <ListItemText primary={user.name} secondary={user.email} />
-            <ListItemSecondaryAction>
-              <IconButton edge="end" onClick={() => { setSelectedUser(user); setOpen(true); }}>
-                <EditIcon />
-              </IconButton>
-              <IconButton edge="end" onClick={() => handleDeleteUser(user.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-    </div>
+    <Container>
+      <Box my={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Usuarios
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          onClick={() => {
+            setSelectedUser(null);
+            setOpen(true);
+          }}
+        >
+          Agregar
+        </Button>
+        <UserForm
+          user={selectedUser}
+          onSave={selectedUser ? handleEditUser : handleAddUser}
+          open={open}
+          onClose={() => setOpen(false)}
+        />
+      </Box>
+      <AppDataTable
+        columns={columns}
+        data={users}
+        renderActions={(user: User) => (
+          <>
+            <IconButton
+              onClick={() => {
+                setSelectedUser(user);
+                setOpen(true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={() => handleDeleteUser(user.fullname)}>
+              <DeleteIcon />
+            </IconButton>
+          </>
+        )}
+      />
+    </Container>
   );
 }
