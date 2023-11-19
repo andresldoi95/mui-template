@@ -3,7 +3,9 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import LoginForm from "@/app/interfaces/auth/LoginForm";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 export default function LoginPage() {
+  const {t} = useTranslation();
   const [form, setForm] = useState<LoginForm>({
     username: "",
     password: "",
@@ -26,7 +28,7 @@ export default function LoginPage() {
         <TextField
           margin="normal"
           id="username"
-          label="Username"
+          label={t('users.username')}
           required
           fullWidth
           name="username"

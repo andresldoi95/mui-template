@@ -1,7 +1,20 @@
 "use client";
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, TextField, InputAdornment, Box } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { use, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TablePagination,
+  TextField,
+  InputAdornment,
+  Box,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { useTranslation } from "react-i18next";
 
 interface Column {
   id: string;
@@ -14,7 +27,12 @@ interface AppDataTableProps {
   renderActions: (item: any) => JSX.Element;
 }
 
-export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, renderActions }) => {
+export const AppDataTable: React.FC<AppDataTableProps> = ({
+  columns,
+  data,
+  renderActions,
+}) => {
+  const { t } = useTranslation();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [search, setSearch] = useState("");
@@ -23,7 +41,9 @@ export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, rende
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -32,8 +52,8 @@ export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, rende
     setSearch(event.target.value);
   };
 
-  const filteredData = data.filter(item => 
-    columns.some(column => 
+  const filteredData = data.filter((item) =>
+    columns.some((column) =>
       item[column.id].toLowerCase().includes(search.toLowerCase())
     )
   );
@@ -42,7 +62,7 @@ export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, rende
     <>
       <Box my={2}>
         <TextField
-          label="Buscar"
+          label={t('datatable.search')}
           variant="outlined"
           value={search}
           fullWidth
@@ -60,18 +80,18 @@ export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, rende
         <Table>
           <TableHead>
             <TableRow>
-              {columns.map(column => (
+              {columns.map((column) => (
                 <TableCell key={column.id}>{column.label}</TableCell>
               ))}
-              <TableCell>Actions</TableCell>
+              <TableCell>{t('datatable.actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(item => (
+              .map((item) => (
                 <TableRow key={item.id}>
-                  {columns.map(column => (
+                  {columns.map((column) => (
                     <TableCell key={column.id}>{item[column.id]}</TableCell>
                   ))}
                   <TableCell>{renderActions(item)}</TableCell>
@@ -87,6 +107,7 @@ export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, rende
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage={t('datatable.rows_per_page')}
         />
       </TableContainer>
     </>

@@ -16,6 +16,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupIcon from "@mui/icons-material/Group";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 export default function AppDrawer({
   drawerWidth,
@@ -26,6 +27,7 @@ export default function AppDrawer({
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const {t} = useTranslation();
   const theme = useTheme();
   const handleDrawerClose = () => {
     setOpen(false);
@@ -60,7 +62,7 @@ export default function AppDrawer({
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="Login form" />
+            <ListItemText primary={t('drawer.login_form')}/>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -68,7 +70,7 @@ export default function AppDrawer({
             <ListItemIcon>
               <PersonAddIcon />
             </ListItemIcon>
-            <ListItemText primary="Sign up form" />
+            <ListItemText primary={t('drawer.sign_up_form')} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -79,7 +81,7 @@ export default function AppDrawer({
             <ListItemIcon>
               <GroupIcon />
             </ListItemIcon>
-            <ListItemText primary="Users" />
+            <ListItemText primary={t('drawer.users')} />
           </ListItemButton>
         </ListItem>
       </List>

@@ -1,0 +1,23 @@
+{
+    "users": {
+        "title": "Users",
+        "fullname": "Full Name",
+        "username": "Username",
+        "email": "Email",
+        "gender": "Gender",
+        "date_birth": "Date of Birth"
+    },
+    "datatable": {
+        "actions": "Actions",
+        "rows_per_page": "Rows per page",
+        "search": "Search"
+    },
+    "crud": {
+        "add": "Add"
+    },
+    "drawer": {
+        "login_form": "Login",
+        "sign_up_form": "Sign up",
+        "users": "Users"
+    }
+}

@@ -7,8 +7,12 @@ import AddIcon from '@mui/icons-material/Add';
 import { User } from '@/app/interfaces/users/User';
 import UserForm from '@/app/components/users/UserForm';
 import { AppDataTable } from '@/app/components/controls/AppDataTable';
+import { useTranslation } from "react-i18next";
+
 
 export default function UsersPage() {
+  const { t } = useTranslation();
+
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [open, setOpen] = useState(false);
@@ -30,18 +34,18 @@ export default function UsersPage() {
   };
 
   const columns = [
-    { id: 'fullname', label: 'Full name' },
-    { id: 'username', label: 'Username' },
-    { id: 'email', label: 'Email' },
-    { id: 'gendre', label: 'Gender' },
-    { id: 'date_birth', label: 'Date of birth' },
+    { id: 'fullname', label: t('users.fullname') },
+    { id: 'username', label: t('users.username') },
+    { id: 'email', label: t('users.email') },
+    { id: 'gender', label: t('users.gender') },
+    { id: 'date_birth', label: t('users.date_birth') },
   ];
 
   return (
     <Container>
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Users
+          {t('users.title')}
         </Typography>
         <Button
           variant="contained"
@@ -52,7 +56,7 @@ export default function UsersPage() {
             setOpen(true);
           }}
         >
-          Add
+          {t('crud.add')}
         </Button>
         <UserForm
           user={selectedUser}
