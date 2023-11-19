@@ -15,7 +15,10 @@
         "gender": "Género",
         "date_birth": "Fecha de nacimiento",
         "password": "Contraseña",
-        "password_confirmation": "Confirmar contraseña"
+        "password_confirmation": "Confirmar contraseña",
+        "male": "Masculino",
+        "female": "Femenino",
+        "other": "Otro"
     },
     "datatable": {
         "actions": "Acciones",
@@ -29,5 +32,15 @@
         "login_form": "Iniciar sesión",
         "sign_up_form": "Registrarse",
         "users": "Usuarios"
+    },
+    "errors": {
+        "username_required": "El nombre de usuario es requerido.",
+        "password_required": "La contraseña es requerida.",
+        "password_confirmation_required": "La confirmación de contraseña es requerida.",
+        "fullname_required": "El nombre completo es requerido.",
+        "email_required": "El correo electrónico es requerido.",
+        "gender_required": "El género es requerido.",
+        "date_birth_required": "La fecha de nacimiento es requerida.",
+        "password_confirmation_same": "La confirmación de contraseña debe ser igual a la contraseña."
     }
 }
