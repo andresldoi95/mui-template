@@ -1,4 +1,5 @@
-import { Drawer, Link } from "@mui/material";
+import { Drawer } from "@mui/material";
+import Link from 'next/link';
 import AppDrawerHeader from "./AppDrawerHeader";
 import {
   IconButton,

@@ -1,6 +1,7 @@
 "use client";
 
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import Link from "next/link";
 import LoginForm from "@/app/interfaces/auth/LoginForm";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,8 +23,7 @@ export default function LoginPage() {
     >
       <Box component="form" noValidate>
         <Typography paragraph>
-          Please, login by entering your <strong>username</strong> and{" "}
-          <strong>password</strong>.
+          {t('auth.login_form')}
         </Typography>
         <TextField
           margin="normal"
@@ -40,17 +40,17 @@ export default function LoginPage() {
           required
           id="password"
           name="password"
-          label="Password"
+          label={t('users.password')}
           type="password"
           fullWidth
           value={form.password}
           onChange={handleInputChange}
         ></TextField>
         <Typography paragraph>
-          Do not you have any account? <Link href="/auth/signup">Sign up!</Link>
+          {t('auth.not_have_account')} <Link href="/auth/signup">{t('auth.sign_up')}</Link>
         </Typography>
         <Button type="submit" variant="contained">
-          Login
+          {t('auth.login')}
         </Button>
       </Box>
     </Box>

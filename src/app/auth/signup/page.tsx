@@ -6,7 +6,6 @@ import {
   FormControl,
   Grid,
   InputLabel,
-  Link,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -15,8 +14,11 @@ import {
 } from "@mui/material";
 import SignupForm from "@/app/interfaces/auth/SignupForm";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 export default function SignupPage() {
+  const {t} = useTranslation();
   const [form, setForm] = useState<SignupForm>({
     fullname: "",
     username: "",
@@ -37,13 +39,13 @@ export default function SignupPage() {
   return (
     <Box component="form" noValidate>
       <Typography paragraph>
-        Please, fill the form and <strong>sign up</strong>.
+        {t('auth.sign_up_form')}
       </Typography>
       <Grid container spacing={2}>
         <Grid item md={4} xs={12}>
           <TextField
             id="fullname"
-            label="Full Name"
+            label={t('users.fullname')}
             required
             fullWidth
             name="fullname"
@@ -54,7 +56,7 @@ export default function SignupPage() {
         <Grid item md={4} xs={12}>
           <TextField
             id="fullname"
-            label="Username"
+            label={t('users.username')}
             required
             fullWidth
             name="username"
@@ -65,7 +67,7 @@ export default function SignupPage() {
         <Grid item md={4} xs={12}>
           <TextField
             id="email"
-            label="Email"
+            label={t('users.email')}
             required
             fullWidth
             name="email"
@@ -79,7 +81,7 @@ export default function SignupPage() {
             <Select
               labelId="gender"
               id="demo-simple-select"
-              label="Gender"
+              label={t('users.gender')}
               required
               name="gender"
               value={form.gender}
@@ -96,7 +98,7 @@ export default function SignupPage() {
             required
             fullWidth
             id="date_birth"
-            label="Date of birth"
+            label={t('users.date_birth')}
             type="date"
             name="date_birth"
             value={form.date_birth}
@@ -111,7 +113,7 @@ export default function SignupPage() {
             fullWidth
             required
             id="password"
-            label="Password"
+            label={t('users.password')}
             type="password"
             name="password"
             value={form.password}
@@ -123,7 +125,7 @@ export default function SignupPage() {
             fullWidth
             required
             id="password_confirmation"
-            label="Password confirmation"
+            label={t('users.password_confirmation')}
             type="password"
             name="password_confirmation"
             value={form.password_confirmation}
@@ -132,10 +134,10 @@ export default function SignupPage() {
         </Grid>
       </Grid>
       <Typography marginTop={1} paragraph>
-        Do you have an account? <Link href="/auth/login">Login!</Link>
+      {t('auth.have_account')} <Link href="/auth/login">{t('auth.login')}</Link>
       </Typography>
       <Button type="submit" variant="contained">
-        Sign up
+        {t('auth.sign_up')}
       </Button>
     </Box>
   );
