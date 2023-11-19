@@ -30,18 +30,18 @@ export default function UsersPage() {
   };
 
   const columns = [
-    { id: 'fullname', label: 'Nombre completo' },
-    { id: 'username', label: 'Nombre de usuario' },
-    { id: 'email', label: 'Correo electrónico' },
-    { id: 'gendre', label: 'Género' },
-    { id: 'date_birth', label: 'Fecha de nacimiento' },
+    { id: 'fullname', label: 'Full name' },
+    { id: 'username', label: 'Username' },
+    { id: 'email', label: 'Email' },
+    { id: 'gendre', label: 'Gender' },
+    { id: 'date_birth', label: 'Date of birth' },
   ];
 
   return (
     <Container>
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Usuarios
+          Users
         </Typography>
         <Button
           variant="contained"
@@ -52,7 +52,7 @@ export default function UsersPage() {
             setOpen(true);
           }}
         >
-          Agregar
+          Add
         </Button>
         <UserForm
           user={selectedUser}

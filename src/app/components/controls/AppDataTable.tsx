@@ -63,7 +63,7 @@ export const AppDataTable: React.FC<AppDataTableProps> = ({ columns, data, rende
               {columns.map(column => (
                 <TableCell key={column.id}>{column.label}</TableCell>
               ))}
-              <TableCell>Acciones</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
